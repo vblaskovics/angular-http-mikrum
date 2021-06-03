@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -22,6 +22,20 @@ export class UserService {
 
   getUserQuery(query:any): Observable<User[]> {
     return this.httpClient.get<User[]>(this.API, { params: query });
+  }
+
+  handleError(err: HttpErrorResponse): Observable<never> {
+    let errorMessage = '';
+
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = err.error.message;
+    } else {
+      errorMessage = `Error Code: ${err.status}, Message: ${err.message}`;
+    }
+
+    console.log(errorMessage);
+
+    return throwError(errorMessage);
   }
 
 }

@@ -1,5 +1,35 @@
-<h1>Hello </h1>
+<div class="ui container">
+  <h1>Hello {{ user?.name }} </h1>
+</div>
 
-<!-- Filter Form -->
+<form class="ui form container">
+  <div class="field">
+    <label for="id">Id</label>
+    <input id="id" name="id" type="text" [(ngModel)]="id" (change)="onQuery()">
+  </div>
+  <div class="field">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" [(ngModel)]="username" (change)="onQuery()">
+  </div>
+</form>
 
-<!-- Table -> Users -->
+<div class="ui container">
+  <table class="ui celled padded table">
+    <thead>
+      <tr>
+        <th>User Id</th>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
